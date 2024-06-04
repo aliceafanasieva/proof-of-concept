@@ -1,5 +1,7 @@
 // - - - - - - - Setup - - - - - - - -
 
+
+
 // Importeer het npm pakket express uit de node_modules map
 import express from "express";
 import fetchJson from "./helpers/fetch-json.js";
@@ -17,9 +19,19 @@ app.set("views", "./views");
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'))
 
+const apiUrl = "https://fdnd-agency.directus.app/items/"
+const apiPersons = (apiUrl + 'anwb_persons')
+const apiRoles = (apiUrl + 'anwb_roles')
+const apiVacation= (apiUrl + 'anwb_vacation_days')
+
 
 // - - - - - - - Routing - - - - - - - -
 
+// - - - - GET Route voor login pagina - - - - 
+
+app.get('/', function(request, response) {
+  response.render('login');
+});
 
 // - - - - - - - Start webserver - - - - - - - -
 
