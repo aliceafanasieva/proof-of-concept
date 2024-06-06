@@ -24,6 +24,9 @@ const apiPersons = (apiUrl + 'anwb_persons')
 const apiRoles = (apiUrl + 'anwb_roles')
 const apiVacation= (apiUrl + 'anwb_vacation_days')
 
+const persons = await fetchJson(apiPersons);
+console.log('persons API', persons)
+
 
 // - - - - - - - Routing - - - - - - - -
 
@@ -31,7 +34,75 @@ const apiVacation= (apiUrl + 'anwb_vacation_days')
 
 app.get('/', function(request, response) {
   response.render('login');
+  
 });
+
+// - - - - POST-route voor het afhandelen van het indienen van inlogformulier - - - -
+
+app.post('/login', async function(request, response) {
+  const username = request.body.username;
+  try {
+    // De fetchJson-functie doet een HTTP-verzoek aan een API-endpoint en retourneert JSON-gegevens.
+    const persons = await fetchJson(apiPersons);
+    console.log('persons API', persons)
+    /* profiles bevat data over members {"id":2,"family_id":1,"name":"Daan", etc. . . }
+     find() zoekt het eerste profiel uit de profiles.data waarvan de naam 
+     (in kleine letters) overeenkomt met de ingevoerde username (ook in kleine letters). */
+    const user = persons.data.find(person => person.name.toLowerCase() === username.toLowerCase());
+
+    if (user) {
+      response.redirect(`/overzicht/${user.id}`);
+    } else {
+      response.status(404).send('User not found');
+    }
+  } catch (error) {
+    console.error('Error fetching data:', error);
+    response.status(500).send('Internal Server Error');
+  }
+});
+
+app.get('/overzicht/:id', async function(request, response) {
+  /* Functie request.params.id geeft de waarde van id terug (bijv. 2)
+   Het maakt een URL met een filterqueryparameter om alleen  
+   data van item met de specifieke ID op te halen. */
+  const userId = request.params.id;
+  const currentPath = request.path;
+  try {
+    const profileResponse = await fetchJson(`${apiPersons}?filter={"id":${userId}}`);
+    const user = profileResponse.data[0];
+
+    if (user) {
+      response.render('overzicht', {
+        user: user,
+        userId: userId, 
+        currentPath: currentPath
+      });
+    } else {
+      response.status(404).send('User not found');
+    }
+  } catch (error) {
+    console.error('Error fetching data:', error);
+    response.status(500).send('Internal Server Error');
+  }
+});
+
+
+// - - - - GET route voor HEAD - - - -
+
+app.get('/partials/head/:id', async function(request, response) {
+  const userId = request.params.id;
+  const currentPath = request.path;
+  try {
+    response.render('head', {
+      userId: userId,
+      currentPath: currentPath
+    });
+  } catch (error) {
+    console.error('Error fetching data:', error);
+    response.status(500).send('Internal Server Error');
+  }
+});
+
 
 // - - - - - - - Start webserver - - - - - - - -
 

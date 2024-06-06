@@ -21,13 +21,7 @@
         </svg></li>
         <li><svg id="x-icon" xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 24 24">
           <path fill="none" stroke="#ff0000" stroke-linecap="round" d="m6 6l12 12m0-12L6 18" />
-        </svg></li>
-        <form class="search-form" action="/search" method="GET">
-        <input type="text" name="query" placeholder="Search...">
-        <button class="search-button"type="submit">Search</button>
-        </form>
-        <a href="https://www.oba.nl/"><img src="/logo_oba.png" alt="Link to example.com" width="80" height="41"></a>
-      </ul>
+        </svg></li>  </ul>
       <ul class="sidebar">
         <li><a class="nav_option <%= currentPath === `/profile/${userId}` ? 'active' : '' %>" href="/profile/<%= userId %>">Mijn profiel</a></li>
         <li><a class="nav_option <%= currentPath === `/personal_page/${userId}` ? 'active' : '' %>" href="/personal_page/<%= userId %>">Persoonlijke pagina</a></li>
