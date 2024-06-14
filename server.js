@@ -60,6 +60,8 @@ app.post('/login', async function(request, response) {
   }
 });
 
+// - - - - GET Route voor overzicht pagina - - - - 
+
 app.get('/overzicht/:id', async function(request, response) {
   /* Functie request.params.id geeft de waarde van id terug (bijv. 2)
    Het maakt een URL met een filterqueryparameter om alleen  
