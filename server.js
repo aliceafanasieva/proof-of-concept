@@ -22,7 +22,7 @@ app.use(express.static('public'))
 const apiUrl = "https://fdnd-agency.directus.app/items/"
 const apiPersons = (apiUrl + 'anwb_persons')
 const apiRoles = (apiUrl + 'anwb_roles')
-const apiVacation= (apiUrl + 'anwb_vacation_days')
+const apiVacation = (apiUrl + 'anwb_vacation_days')
 
 const persons = await fetchJson(apiPersons);
 console.log('persons API', persons)
@@ -34,7 +34,6 @@ console.log('persons API', persons)
 
 app.get('/', function(request, response) {
   response.render('login');
-  
 });
 
 // - - - - POST-route voor het afhandelen van het indienen van inlogformulier - - - -
@@ -67,9 +66,13 @@ app.get('/overzicht/:id', async function(request, response) {
    data van item met de specifieke ID op te halen. */
   const userId = request.params.id;
   const currentPath = request.path;
+  const roles = await fetchJson(apiRoles);
+  console.log('roles API', roles)
   try {
     const profileResponse = await fetchJson(`${apiPersons}?filter={"id":${userId}}`);
     const user = profileResponse.data[0];
+    const roleId = profileResponse.data[0].roles[0]
+    console.log('roles API', roleId)
 
     if (user) {
       response.render('overzicht', {

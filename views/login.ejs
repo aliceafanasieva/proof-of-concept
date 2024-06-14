@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>OBA</title>
+    <title>ANWB</title>
     <!-- Icons source Boxicons.com -->
     <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
@@ -19,15 +19,35 @@
     <div class="circle circle3"></div>
     <div class="circle circle4"></div>
     <main class="login-main">
-        <h2>Welkom bij planner ANWB</h2>
+        <h2>Welkom bij Pitch planner van ANWB !</h2>
         <h3>Log in om verder te gaan: </h3>
         <section class="login-container">
           <form action="/login" method="POST">
               <input type="text" id="username" placeholder="Gebruikersnaam" name="username" required>
+              <input type = "password" id="password" placeholder="Wachtwoord" data-sign="*" name="password" required>
               <button type="submit">Login</button>
           </form>
         </section>
     </main>
   </div>
+
+ <!--- Hier gebruik ik checkValidity() methode  --> 
+  <script>
+    function myFunction() {
+      const username = document.getElementById("username");
+      if (!username.checkValidity()) {
+        document.getElementById("username").innerHTML = username.validationMessage;
+      } else {
+        document.getElementById("username").innerHTML = "Input OK";
+      } 
+
+      const password = document.getElementById("username");
+      if (!password.checkValidity()) {
+        document.getElementById("demo").innerHTML = inpObj.validationMessage;
+      } else {
+        document.getElementById("demo").innerHTML = "Input OK";
+      } 
+    } 
+    </script>
 
 <%- include('./partials/foot') %>

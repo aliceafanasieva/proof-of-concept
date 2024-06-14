@@ -1,3 +1,93 @@
 <%- include('./partials/head', { userId: userId }) %>
 
-<h1>Welkom bij Planner, <%= user.name %>!</h1>
+    <main class="overview-main">
+        <section class="welcoming-message">
+            <h1>Hallo, <%= user.name %>!</h1>
+            <h3>U bent vandaag 2e lijns support</h3>
+        </section>
+
+        <section class="reminder">
+            <div class="table-container">
+                <div class="row">
+                    <div class="cell header row-header"></div>
+                    <div class="cell header">aankomende diensten</div>
+                </div>
+                <div class="row">
+                    <div class="cell row-header">week 23</div>
+                    <div class="cell">2e lijns support</div>
+                </div>
+                <div class="row">
+                    <div class="cell row-header">week 25</div>
+                    <div class="cell">1e lijns support</div>
+                </div>
+                <div class="row">
+                    <div class="cell row-header">week 26</div>
+                    <div class="cell">Technische beheerder</div>
+                </div>
+                <div class="row">
+                    <div class="cell row-header">week 29</div>
+                    <div class="cell">Incident manager</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="planner">
+            <div class="table-container">
+                <div class="row">
+                <div class="cell header row-header"></div>
+                <div class="cell header">22</div>
+                <div class="cell header">23</div>
+                <div class="cell header">24</div>
+                <div class="cell header">25</div>
+                <div class="cell header">26</div>
+                <div class="cell header">27</div>
+                </div>
+                <div class="row">
+                <div class="cell row-header">1e lijns support</div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                </div>
+                <div class="row">
+                <div class="cell row-header">2e lijns support</div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                </div>
+                <div class="row">
+                <div class="cell row-header">Incident Manager</div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                </div>
+                <div class="row">
+                <div class="cell row-header">Incident Coordinator</div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                </div>
+                <div class="row">
+                <div class="cell row-header">Technische Beheerder</div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                </div>
+            </div>
+        </section>
+        
+    </main>
