@@ -21,7 +21,10 @@ Maak voor de ANWB een planner tool, waarmee er per week piket diensten geplant e
 ### User story
 Als medewerker van de ANWB wil ik kunnen zien wie er per week werkt en als welke functie diegene staat, als medewerker van ANWB wil ik meteen kunnen zien welke diensten ik heb aankomende weken. Hiervoor heb ik website gemaakt waar de gebruiker kan inloggen en meteen twee tabellen zien: een met zijn eigen aankomende diensten, en tweede met overzicht van diensten van medewerkers. 
 ### Gebruik
-Door in te loggen met zijn naam ziet de gebruiker de eigen planner en planner met alle diensten van collegas en functies erbij voor aankomende weken. 
+Door in te loggen met zijn naam ziet de gebruiker de eigen planner en planner met alle diensten van collegas en functies erbij voor aankomende weken.
+
+![ScreenRecording2024-06-20at11 48 08-ezgif com-video-to-gif-converter](https://github.com/aliceafanasieva/proof-of-concept/assets/66431299/d70ea5e1-6965-469c-b3a1-b7117f64cd35)
+
 
 ## Kenmerken
 ### Ontwerp
