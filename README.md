@@ -9,12 +9,12 @@
   * [Gebruik](#gebruik)
   * [Kenmerken](#kenmerken)
   * [Installatie](#installatie)
-  * [Bronnen](#bronnen)
   * [Licentie](#licentie)
 
 ## Beschrijving
-<!-- Bij Beschrijving staat kort beschreven wat voor project het is en wat je hebt gemaakt -->
-<!-- Voeg een mooie poster visual toe 📸 -->
+Maak voor de ANWB een planner tool, waarmee er per week piket diensten geplant en bekeken kunnen worden. Zowel de naam als functie moet zichtbaar zijn in de week planning. 
+<img width="1261" alt="image" src="https://github.com/aliceafanasieva/proof-of-concept/assets/66431299/9bd963ee-e77d-44a0-b4e1-fe36b900290d">
+
 <!-- Voeg een link toe naar Github Pages 🌐-->
 
 ## Gebruik
