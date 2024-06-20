@@ -5,23 +5,24 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ANWB</title>
-    <script src="/overview_script.js" defer></script>
     <link rel="stylesheet" href="/style.css"> 
   </head>
 <body>
-  <div class="login-main-container">
-    <main class="login-main">
-        <h2>Welkom bij Pitch planner van ANWB !</h2>
-        <h3>Log in om verder te gaan: </h3>
-        <section class="login-container">
-          <form action="/login" method="POST">
-              <input type="text" id="username" placeholder="Gebruikersnaam" name="username" required>
-              <input type = "password" id="password" placeholder="Wachtwoord" data-sign="*" name="password" required>
-              <button type="submit">Login</button>
-          </form>
-        </section>
-    </main>
-  </div>
+  <main id="swup" class="transition-fade">
+    <div class="login-main-container">
+      <main class="login-main">
+          <h2>Welkom bij Pitch planner van ANWB !</h2>
+          <h3>Log in om verder te gaan: </h3>
+          <section class="login-container">
+            <form action="/login" method="POST">
+                <input type="text" id="username" placeholder="Gebruikersnaam" name="username" required>
+                <input type = "password" id="password" placeholder="Wachtwoord" data-sign="*" name="password" required>
+                <button type="submit">Login</button>
+            </form>
+          </section>
+      </main>
+    </div>
+  </main>
 
  <!--- Hier gebruik ik checkValidity() methode  --> 
   <script>
@@ -41,5 +42,11 @@
       } 
     } 
     </script>
+
+    <script type="module">
+      import Swup from 'https://unpkg.com/swup@4?module';
+      const swup = new Swup();
+    </script>
+    <script defer src="public/script.js"></script>
 
 <%- include('./partials/foot') %>

@@ -1,7 +1,3 @@
-// - - - - - - - Setup - - - - - - - -
-
-
-
 // Importeer het npm pakket express uit de node_modules map
 import express from "express";
 import fetchJson from "./helpers/fetch-json.js";
@@ -22,11 +18,10 @@ app.use(express.static('public'))
 const apiUrl = "https://fdnd-agency.directus.app/items/"
 const apiPersons = (apiUrl + 'anwb_persons')
 const apiRoles = (apiUrl + 'anwb_roles')
-const apiVacation = (apiUrl + 'anwb_vacation_days')
-
-const persons = await fetchJson(apiPersons);
-console.log('persons API', persons)
-
+const apiAssignments = (apiUrl + 'anwb_assignments')
+const apiWeeks = (apiUrl + 'anwb_weeks')
+const anwbWeek = apiUrl + "anwb_week?fields=*,assignments.*,assignments.anwb_assignments_id.*,assignments.anwb_assignments_id.role.anwb_roles_id.role,assignments.anwb_assignments_id.person.anwb_persons_id.name"
+   
 
 // - - - - - - - Routing - - - - - - - -
 
@@ -44,7 +39,7 @@ app.post('/login', async function(request, response) {
     // De fetchJson-functie doet een HTTP-verzoek aan een API-endpoint en retourneert JSON-gegevens.
     const persons = await fetchJson(apiPersons);
     console.log('persons API', persons)
-    /* profiles bevat data over members {"id":2,"family_id":1,"name":"Daan", etc. . . }
+    /* profiles bevat data over members 
      find() zoekt het eerste profiel uit de profiles.data waarvan de naam 
      (in kleine letters) overeenkomt met de ingevoerde username (ook in kleine letters). */
     const user = persons.data.find(person => person.name.toLowerCase() === username.toLowerCase());
@@ -68,19 +63,48 @@ app.get('/overzicht/:id', async function(request, response) {
    data van item met de specifieke ID op te halen. */
   const userId = request.params.id;
   const currentPath = request.path;
-  const roles = await fetchJson(apiRoles);
-  console.log('roles API', roles)
+
   try {
-    const profileResponse = await fetchJson(`${apiPersons}?filter={"id":${userId}}`);
-    const user = profileResponse.data[0];
-    const roleId = profileResponse.data[0].roles[0]
-    console.log('roles API', roleId)
+    const persons = await fetchJson(apiPersons);
+    const assignments = await fetchJson(apiAssignments);
+    const roles = await fetchJson(apiRoles);
+    const weeks = await fetchJson(anwbWeek);
+    const user = persons.data.find(person => person.id == userId);
+
+    const roleNamesByWeek = weeks.data.map(week => {
+      const userRoles = [];
+
+      week.assignments.forEach(assignment => {
+        const rolesForAssignment = assignment.anwb_assignments_id.role.map((role, index) => {
+          const person = assignment.anwb_assignments_id.person[index];
+          if (person && person.anwb_persons_id.name === user.name) {
+            return role.anwb_roles_id.role;
+          }
+          return null;
+        }).filter(role => role !== null);
+
+        userRoles.push(...rolesForAssignment);
+      });
+
+      return {
+        week: `Week ${week.week.split('-W')[1]}`,
+        roles: userRoles
+      };
+    }).filter(item => item.roles.length > 0);
+
+
+
+    const predefinedRoles = ["1e lijns support", "2e lijns support", "Incident Manager", "Incident Coordinator", "Technische Beheerder"];
+
 
     if (user) {
       response.render('overzicht', {
         user: user,
-        userId: userId, 
-        currentPath: currentPath
+        userId: userId,
+        currentPath: currentPath,
+        roleNamesByWeek: roleNamesByWeek,
+        weeks: weeks.data,
+        roles: predefinedRoles
       });
     } else {
       response.status(404).send('User not found');
