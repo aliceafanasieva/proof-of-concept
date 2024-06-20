@@ -28,7 +28,7 @@ Door in te loggen met zijn naam ziet de gebruiker de eigen planner en planner me
 
 ## Kenmerken
 ### Ontwerp
-Hier kunt u mijn ontwerp bekijken in Figma: <a href="[https://www.figma.com/design/YMvQqtDM9kCeK9NKtJC1mV/ANWB-wireflow?node-id=0-1&t=jkoflODEmzZW0ZHD-1]">Wireflow ANWB</a>
+Hier kunt u mijn ontwerp bekijken in Figma: https://www.figma.com/design/YMvQqtDM9kCeK9NKtJC1mV/ANWB-wireflow?node-id=0-1&t=jkoflODEmzZW0ZHD-1
 Ik heb een uitgebreide wireframe ontwerp gemaakt in Figma, helaas was niet alles wat ik heb ontworpen gelukt om binnen de aangegeven tijd af te krijgen. 
 Bij het ontwerp heb ik de kleuren pallet van de ANWB style guide geinterpreteerd, zodat dit aansluit bij de huisstijl en de gebruiker een verband kan zien. 
 
