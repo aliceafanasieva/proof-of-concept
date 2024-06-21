@@ -230,7 +230,7 @@ main {
   grid-template-rows: auto auto auto;
   max-width: 1300px;
   margin: auto;
-  margin-left: calc(8rem + 1%);
+  margin-left: calc(12rem + 1%);
   padding-bottom: 5rem;
   min-height: 100vh;
 }
