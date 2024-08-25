@@ -1,89 +1,95 @@
 <%- include('./partials/head', { userId: userId }) %>
 
-    <main id="swup" class="transition-fade">
-        <section class="overview">
-            <section class="welcoming-message">
-                <h1>Hallo, <b><%= user.name %>!</b></h1>
-                <h3>U bent deze week <b>2e lijns support</b></h3>
-            </section>
+<main id="swup" class="transition-fade">
+    <section class="overview">
+        <section class="welcoming-message">
+            <h1>Hallo, <b><%= user.name %>!</b></h1>
+            <h3>U bent deze week <b>2e lijns support</b></h3>
+        </section>
 
-            <!-- Toggle switch -->
+        <!-- Toggle switch -->
 
-            <section class="toggle-btns">
-                <div class="btn-container et">
-                    <label class="switch btn-color-mode-switch">
-                        <input value="1" id="color_mode_1" name="color_mode_1" type="checkbox">
-                        <label class="btn-color-mode-switch-inner" data-off="totaal" data-on="eigen" for="color_mode"></label>
-                    </label>
-                </div>
-
-                <div class="btn-container wm">
-                    <label class="switch btn-color-mode-switch">
-                        <input value="1" id="color_mode_2" name="color_mode_2" type="checkbox">
-                        <label class="btn-color-mode-switch-inner" data-off="week" data-on="maand" for="color_mode"></label>
-                    </label>
-                </div>
-            </section>
-
-            <!-- Reminder -->
-
-            <div class="reminder">
-                <div class="title-row">Aankomende diensten</div>
-                <div class="content">
-                    <% roleNamesByWeek.forEach(item => { %>
-                        <% item.roles.forEach(role => { %>
-                            <div class="row">
-                                <div class="cell"><%= item.week %></div>
-                                <div class="cell"><%= role %></div>
-                            </div>
-                        <% }) %>
-                    <% }) %>
-                </div>
+        <section class="toggle-btns">
+            <div class="btn-container et">
+                <label for="color_mode_1" class="switch btn-color-mode-switch">
+                    <input value="1" id="color_mode_1" name="color_mode_1" type="checkbox">
+                    <span class="btn-color-mode-switch-inner" data-off="totaal" data-on="eigen"></span>
+                    <span class="sr-only">totaal en eigen</span>
+                </label>
             </div>
+        
+            <div class="btn-container wm">
+                <label for="color_mode_2" class="switch btn-color-mode-switch">
+                    <input value="1" id="color_mode_2" name="color_mode_2" type="checkbox">
+                    <span class="btn-color-mode-switch-inner" data-off="week" data-on="maand"></span>
+                    <span class="sr-only">week en maand</span>
+                </label>
+            </div>
+        </section>
 
-            <!-- Planner -->
-            
-            <section class="planner">
-                <div class="table-container">
-                    <!-- Table Header -->
-                    <div class="table-header">
-                        <div class="cell"></div>
-                        <% weeks.forEach(week => { %>
-                            <div class="cell header-cell"><%= `Week ${week.week.split('-W')[1]}` %></div>
-                        <% }) %>
-                    </div>
-            
-                    <!-- Table Rows -->
-                    <% roles.forEach(role => { %>
-                        <div class="table-row">
-                            <div class="cell role-cell"><%= role %></div>
-                            <% weeks.forEach(week => { %>
-                                <div class="cell">
-                                    <% 
-                                    const assignment = week.assignments.find(assign => 
-                                        assign.anwb_assignments_id.role.some(r => r.anwb_roles_id.role === role)
-                                    );
-                                    if (assignment) {
-                                        const personIndex = assignment.anwb_assignments_id.role.findIndex(r => r.anwb_roles_id.role === role);
-                                        const personName = assignment.anwb_assignments_id.person[personIndex]?.anwb_persons_id.name;
-                                        if (personName) {
-                                            %><%= personName %><%
-                                        }
-                                    }
-                                    %>
-                                </div>
-                            <% }) %>
+        <!-- Reminder -->
+
+        <div class="reminder">
+            <div class="title-row">Aankomende diensten</div>
+            <div class="content">
+                <% roleNamesByWeek.forEach(item => { %>
+                    <% item.roles.forEach(role => { %>
+                        <div class="row">
+                            <div class="cell"><%= item.week %></div>
+                            <div class="cell"><%= role %></div>
                         </div>
                     <% }) %>
-                </div>
-            </section>
-        </section>
-    </main>
+                <% }) %>
+            </div>
+        </div>
 
-    <script type="module">
-        import Swup from 'https://unpkg.com/swup@4?module';
-        const swup = new Swup();
-    </script>
+        <!-- Planner -->
+        
+        <section class="planner">
+            <div class="table-container">
+                <!-- Table Header -->
+                <div class="table-header">
+                    <div class="cell"></div>
+                    <% weeks.forEach(week => { %>
+                        <div class="cell header-cell"><%= `Week ${week.week.split('-W')[1]}` %></div>
+                    <% }) %>
+                </div>
+        
+                <!-- Table Rows -->
+                <% roles.forEach(role => { %>
+                    <div class="table-row">
+                        <div class="cell role-cell"><%= role %></div>
+                        <% weeks.forEach(week => { %>
+                            <div class="cell">
+                                <% 
+                                const assignment = week.assignments.find(assign => 
+                                    assign.anwb_assignments_id.role.some(r => r.anwb_roles_id.role === role)
+                                );
+                                if (assignment) {
+                                    const personIndex = assignment.anwb_assignments_id.role.findIndex(r => r.anwb_roles_id.role === role);
+                                    const personName = assignment.anwb_assignments_id.person[personIndex]?.anwb_persons_id.name;
+                                    if (personName) {
+                                        if (personName === user.name) { %>
+                                            <strong><%= personName %></strong>
+                                        <% } else { %>
+                                            <%= personName %>
+                                        <% }
+                                    }
+                                }
+                                %>
+                            </div>
+                        <% }) %>
+                    </div>
+                <% }) %>
+            </div>
+        </section>
+    </section>
+</main>
+
+<script type="module">
+    import Swup from 'https://unpkg.com/swup@4?module';
+    const swup = new Swup();
+</script>
 
 </body>
 </html>

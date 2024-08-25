@@ -479,14 +479,14 @@ input:-webkit-autofill:active{
 /*         Toggle Button         */
 /*********************************/
 
-
 .btn-container {
-  display: table-cell;
-  vertical-align: middle;
-  text-align: center;
+  display: inline-block;
+  margin: 0 1rem;
   color: var(--text-color);
   text-transform: uppercase;
   font-size: 11px;
+  vertical-align: middle;
+  text-align: center;
 }
 
 .btn-color-mode-switch {
@@ -495,8 +495,8 @@ input:-webkit-autofill:active{
   position: relative; 
 }
 
-.btn-color-mode-switch > label.btn-color-mode-switch-inner {
-  margin: 0px;
+.btn-color-mode-switch .btn-color-mode-switch-inner {
+  display: block;
   width: 145px;
   height: 45px;
   background-color: rgba(116, 116, 116, 0.341);
@@ -504,30 +504,37 @@ input:-webkit-autofill:active{
   overflow: hidden;
   position: relative;
   transition: all 0.3s ease;
-  display: block;
+  cursor: pointer;
+  line-height: 45px; 
+  text-align: center; 
 }
 
-.btn-color-mode-switch > label.btn-color-mode-switch-inner:before {
+.btn-color-mode-switch .btn-color-mode-switch-inner:before {
   content: attr(data-on);
   position: absolute;
-  top: 14px;
-  right: 17px;
+  top: 50%;
+  left: 20px;
+  transform: translateY(-50%);
+  color: var(--text-color);
+  transition: all 0.3s ease;
 }
 
-.btn-color-mode-switch > label.btn-color-mode-switch-inner:after {
+.btn-color-mode-switch .btn-color-mode-switch-inner:after {
   content: attr(data-off);
   width: 70px;
-  height: 25px;
+  height: 35px;
   background: var(--background-color);
   border-radius: 26px;
   position: absolute;
-  display: flex;
-  left: 5px;
   top: 5px;
-  transition: all 0.3s ease;
-  padding: 5px 0px;
+  left: 5px;
+  display: flex;
   justify-content: center;
-  line-height: 26px; 
+  align-items: center;
+  line-height: normal; 
+  transition: all 0.3s ease;
+  color: var(--text-color);
+  text-align: center;
 }
 
 .btn-color-mode-switch input[type="checkbox"] {
@@ -541,16 +548,20 @@ input:-webkit-autofill:active{
   margin: 0px;
 }
 
-.btn-color-mode-switch input[type="checkbox"]:checked + label.btn-color-mode-switch-inner:after {
-  content: attr(data-on);
+.btn-color-mode-switch input[type="checkbox"]:checked + .btn-color-mode-switch-inner:after {
   left: 68px;
 }
 
-.btn-color-mode-switch input[type="checkbox"]:checked + label.btn-color-mode-switch-inner:before {
-  content: attr(data-off);
-  right: auto;
-  left: 20px;
+.btn-color-mode-switch input[type="checkbox"]:checked + .btn-color-mode-switch-inner:before {
+  left: auto;
+  right: 17px;
+  transform: translateY(-50%);
 }
+
+.btn-container span {
+  display: none;
+}
+
 
 /*********************************/
 /*            Buttons            */

@@ -2,7 +2,6 @@
 import express from "express";
 import fetchJson from "./helpers/fetch-json.js";
 
-
 // Maak een nieuwe express app aan
 const app = express();
 
